@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { HiArrowRight, HiChevronDown } from 'react-icons/hi2'
+import SoftwareTag from '@/components/SoftwareTag/SoftwareTag'
 import styles from './Hero.module.css'
 
 export default function Hero() {
@@ -8,6 +9,8 @@ export default function Hero() {
       <div className={styles.container}>
         {/* Conteúdo Principal */}
         <div className={styles.content}>
+          <SoftwareTag />
+          
           <h1 className={styles.headline}>
             Sua Próxima Saída Para Automação Inteligente
           </h1>

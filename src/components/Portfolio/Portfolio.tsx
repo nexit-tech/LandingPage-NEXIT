@@ -1,4 +1,5 @@
-import { HiCog, HiChartBar, HiServerStack } from 'react-icons/hi2'
+import { HiArrowRight } from 'react-icons/hi2'
+import Image from 'next/image'
 import styles from './Portfolio.module.css'
 
 export default function Portfolio() {
@@ -6,30 +7,33 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
-      icon: HiCog,
-      client: 'TechVision',
-      projectName: 'Sistema Integrado de Gestão',
-      category: 'Automação de Processos',
-      result: 'Redução de 62% no Tempo de Processamento',
-      context: 'Empresa de tecnologia enfrentava gargalos operacionais com processos manuais que limitavam crescimento e geravam retrabalho constante.'
+      image: '/portfolio/menthal.png',
+      client: 'Plataforma de Gestão para Psicólogos',
+      projectName: 'Menthal',
+      category: 'Sistema de Gestão',
+      result: 'Gestão Completa Automatizada',
+      context: 'Sistema integrado desenvolvido com React, Vite e JavaScript, contemplando prontuários digitais, gestão financeira e sistema de agendamentos.',
+      techs: ['React', 'JavaScript', 'Vite']
     },
     {
       id: 2,
-      icon: HiChartBar,
-      client: 'DataFlow Solutions',
-      projectName: 'Plataforma de Análise Preditiva',
-      category: 'Inteligência de Dados',
-      result: 'Aumento de 45% na Eficiência Operacional',
-      context: 'Necessidade de consolidar dados fragmentados e criar insights acionáveis em tempo real para tomada de decisão estratégica.'
+      image: '/portfolio/oddwise.png',
+      client: 'Plataforma Educativa com IA para Análise Estatística',
+      projectName: 'Oddwise',
+      category: 'Inteligência Artificial',
+      result: 'Sistema Multi-Linguagem de Alta Performance',
+      context: 'Plataforma educativa que utiliza IA para análise estatística em apostas esportivas. Arquitetura robusta com Python, React, TypeScript, Docker e Next.js.',
+      techs: ['Python', 'React', 'TypeScript', 'Next.js', 'Docker']
     },
     {
       id: 3,
-      icon: HiServerStack,
-      client: 'ConnectHub',
-      projectName: 'Hub de Integração Multicanal',
-      category: 'Integração de Sistemas',
-      result: 'Economia de 120 Horas Mensais',
-      context: 'Processos de comunicação descentralizados geravam perda de informação e duplicidade de esforços entre departamentos.'
+      image: '/portfolio/riftpass.png',
+      client: 'Plataforma de Fidelização Regional',
+      projectName: 'Riftpass',
+      category: 'E-commerce & Fidelização',
+      result: 'Engajamento Local Digitalizado',
+      context: 'Sistema de fidelização desenvolvido para empresas da Região dos Lagos. Solução completa criada com React, JavaScript e Vite.',
+      techs: ['React', 'JavaScript', 'Vite']
     }
   ]
 
@@ -48,47 +52,50 @@ export default function Portfolio() {
 
         {/* Grid de Projetos */}
         <div className={styles.projectsGrid}>
-          {projects.map((project) => {
-            const IconComponent = project.icon
-            return (
-              <div key={project.id} className={styles.projectCard}>
-                {/* Ícone */}
-                <div className={styles.iconContainer}>
-                  <IconComponent className={styles.projectIcon} />
+          {projects.map((project) => (
+            <div key={project.id} className={styles.projectCard}>
+              {/* Lado Esquerdo: Logo */}
+              <div className={styles.logoSection}>
+                <div className={styles.logoContainer}>
+                  <Image
+                    src={project.image}
+                    alt={project.client}
+                    fill
+                    className={styles.logo}
+                    sizes="(max-width: 768px) 100vw, 200px"
+                  />
                 </div>
-
-                {/* Tag de Categoria */}
-                <span className={styles.category}>
-                  {project.category}
-                </span>
-
-                {/* Nome do Cliente/Projeto */}
-                <h3 className={styles.projectName}>
-                  {project.projectName}
-                </h3>
-
-                <p className={styles.client}>
-                  {project.client}
-                </p>
-
-                {/* Divisor */}
-                <div className={styles.divider}></div>
-
-                {/* Resultado Principal */}
-                <div className={styles.resultContainer}>
-                  <span className={styles.resultLabel}>Resultado</span>
-                  <p className={styles.result}>
-                    {project.result}
-                  </p>
-                </div>
-
-                {/* Contexto */}
-                <p className={styles.context}>
-                  {project.context}
-                </p>
               </div>
-            )
-          })}
+
+              {/* Lado Direito: Conteúdo */}
+              <div className={styles.contentSection}>
+                <div className={styles.cardHeader}>
+                  <span className={styles.category}>{project.category}</span>
+                  <div className={styles.arrowIcon}>
+                    <HiArrowRight />
+                  </div>
+                </div>
+
+                <h3 className={styles.projectName}>{project.projectName}</h3>
+                <p className={styles.client}>{project.client}</p>
+
+                <div className={styles.resultContainer}>
+                  <span className={styles.resultLabel}>RESULTADO</span>
+                  <p className={styles.result}>{project.result}</p>
+                </div>
+
+                <p className={styles.context}>{project.context}</p>
+
+                <div className={styles.techStack}>
+                  {project.techs.map((tech, index) => (
+                    <span key={index} className={styles.techTag}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

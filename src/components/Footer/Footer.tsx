@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { HiEnvelope, HiPhone, HiMapPin } from 'react-icons/hi2'
-import { FaLinkedinIn, FaGithub, FaMediumM, FaInstagram } from 'react-icons/fa'
+import { FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -34,7 +35,15 @@ export default function Footer() {
         <div className={styles.mainGrid}>
           {/* Coluna 1: Logo e Descrição */}
           <div className={styles.column}>
-            <h3 className={styles.logo}>NEXIT</h3>
+            <div className={styles.logoContainer}>
+              <Image
+                src="/logo/nexitlogo.png"
+                alt="NEXIT Logo"
+                width={120}
+                height={40}
+                className={styles.logo}
+              />
+            </div>
             <p className={styles.description}>
               Sua saída estratégica para automação inteligente e escalável.
             </p>

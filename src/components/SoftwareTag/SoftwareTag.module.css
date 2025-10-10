@@ -1,0 +1,42 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: 1px solid #1A1A1A;
+}
+
+.tag:hover {
+  background-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  font-size: 16px;
+}
+
+.text {
+  line-height: 1;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 480px) {
+  .tag {
+    font-size: 10px;
+    padding: 7px 14px;
+    gap: 6px;
+  }
+
+  .icon {
+    font-size: 14px;
+  }
+}

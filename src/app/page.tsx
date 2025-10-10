@@ -4,27 +4,31 @@ import Methodology from '@/components/Methodology/Methodology'
 import Portfolio from '@/components/Portfolio/Portfolio'
 import CTASection from '@/components/CTASection/CTASection'
 import Footer from '@/components/Footer/Footer'
+import CustomCursor from '@/components/CustomCursor/CustomCursor'
 
 export default function Home() {
   return (
-    <main>
-      {/* Navegação */}
-      <Navbar />
+    <>
+      <CustomCursor />
+      <main>
+        {/* Navegação */}
+        <Navbar />
 
-      {/* Seção Hero */}
-      <Hero />
+        {/* Seção Hero */}
+        <Hero />
 
-      {/* Seção Metodologia */}
-      <Methodology />
+        {/* Seção Metodologia */}
+        <Methodology />
 
-      {/* Seção Portfólio */}
-      <Portfolio />
+        {/* Seção Portfólio */}
+        <Portfolio />
 
-      {/* Seção CTA Final */}
-      <CTASection />
+        {/* Seção CTA Final */}
+        <CTASection />
 
-      {/* Rodapé */}
-      <Footer />
-    </main>
+        {/* Rodapé */}
+        <Footer />
+      </main>
+    </>
   )
 }

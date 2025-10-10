@@ -28,13 +28,21 @@
   gap: 20px;
 }
 
-/* Logo */
+/* Logo Container */
+.logoContainer {
+  margin-bottom: 8px;
+}
+
 .logo {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1A1A1A;
-  letter-spacing: -0.5px;
-  margin: 0;
+  width: auto;
+  height: auto;
+  max-width: 120px;
+  filter: grayscale(0);
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
 }
 
 /* Descrição */
@@ -223,10 +231,6 @@
     grid-column: 1 / -1;
   }
 
-  .logo {
-    font-size: 28px;
-  }
-
   .description {
     max-width: 100%;
   }
@@ -261,7 +265,7 @@
   }
 
   .logo {
-    font-size: 26px;
+    max-width: 100px;
   }
 
   .description {

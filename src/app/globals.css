@@ -15,12 +15,18 @@ body {
   color: #1A1A1A;
   background-color: #FFFFFF;
   line-height: 1.6;
+  cursor: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
   color: #1A1A1A;
+}
+
+h1, h2 {
+  font-family: var(--font-rubik-mono-one), monospace;
+  font-weight: 400;
 }
 
 p {
@@ -31,15 +37,36 @@ p {
 a {
   color: inherit;
   text-decoration: none;
+  cursor: none;
 }
 
 button {
   font-family: inherit;
-  cursor: pointer;
+  cursor: none;
   border: none;
   outline: none;
 }
 
 ul {
   list-style: none;
+}
+
+/* Esconde cursor padrão em desktop */
+@media (min-width: 769px) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Mostra cursor padrão em mobile */
+@media (max-width: 768px) {
+  body,
+  a,
+  button {
+    cursor: auto !important;
+  }
+  
+  * {
+    cursor: auto !important;
+  }
 }
