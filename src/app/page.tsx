@@ -1,0 +1,30 @@
+import Navbar from '@/components/Navbar/Navbar'
+import Hero from '@/components/Hero/Hero'
+import Methodology from '@/components/Methodology/Methodology'
+import Portfolio from '@/components/Portfolio/Portfolio'
+import CTASection from '@/components/CTASection/CTASection'
+import Footer from '@/components/Footer/Footer'
+
+export default function Home() {
+  return (
+    <main>
+      {/* Navegação */}
+      <Navbar />
+
+      {/* Seção Hero */}
+      <Hero />
+
+      {/* Seção Metodologia */}
+      <Methodology />
+
+      {/* Seção Portfólio */}
+      <Portfolio />
+
+      {/* Seção CTA Final */}
+      <CTASection />
+
+      {/* Rodapé */}
+      <Footer />
+    </main>
+  )
+}

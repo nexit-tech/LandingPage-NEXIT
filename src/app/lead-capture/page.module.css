@@ -1,0 +1,493 @@
+/* Container da Página */
+.page {
+  min-height: 100vh;
+  background-color: #FFFFFF;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #E5E5E5;
+  z-index: 1000;
+}
+
+.headerContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1A1A1A;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.backIcon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.backLink:hover {
+  color: #000000;
+}
+
+.backLink:hover .backIcon {
+  transform: translateX(-3px);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.5px;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+.spacer {
+  width: 80px;
+}
+
+/* Main */
+.main {
+  padding-top: 80px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+/* Content Grid */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Info Section */
+.infoSection {
+  position: sticky;
+  top: 160px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #1A1A1A;
+  letter-spacing: -1px;
+  margin: 0 0 24px;
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #6B6B6B;
+  margin: 0 0 60px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* Benefits */
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.benefit {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.benefitIcon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.benefit:hover .benefitIcon {
+  background-color: #000000;
+  transform: scale(1.05);
+}
+
+.benefitContent {
+  flex: 1;
+}
+
+.benefitTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0 0 8px;
+  letter-spacing: -0.2px;
+}
+
+.benefitText {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6B6B6B;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+/* Form Section */
+.formSection {
+  background-color: #F5F5F5;
+  padding: 60px;
+  border-radius: 2px;
+  border: 1px solid #E5E5E5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.formTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+
+/* Form Group */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1A1A1A;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #1A1A1A;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #1A1A1A;
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.05);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #6B6B6B;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.inputError {
+  border-color: #1A1A1A;
+  background-color: #FAFAFA;
+}
+
+.errorText {
+  font-size: 11px;
+  color: #1A1A1A;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Submit Button */
+.submitButton {
+  width: 100%;
+  padding: 16px;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success Message */
+.successMessage {
+  text-align: center;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  border-radius: 50%;
+}
+
+.successTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.successText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6B6B6B;
+  margin: 0;
+  max-width: 400px;
+  letter-spacing: 0.2px;
+}
+
+.newMessageButton {
+  padding: 14px 32px;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.newMessageButton:hover {
+  background-color: #000000;
+  transform: translateY(-2px);
+}
+
+/* Responsividade Desktop Pequeno */
+@media (max-width: 1200px) {
+  .content {
+    gap: 60px;
+  }
+
+  .title {
+    font-size: 42px;
+  }
+
+  .formSection {
+    padding: 50px;
+  }
+}
+
+/* Responsividade Tablet */
+@media (max-width: 968px) {
+  .headerContainer {
+    padding: 0 24px;
+  }
+
+  .container {
+    padding: 60px 24px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .infoSection {
+    position: static;
+  }
+
+  .title {
+    font-size: 38px;
+  }
+
+  .description {
+    margin-bottom: 48px;
+  }
+
+  .benefits {
+    gap: 32px;
+  }
+
+  .formSection {
+    padding: 48px 40px;
+  }
+}
+
+/* Responsividade Mobile */
+@media (max-width: 480px) {
+  .headerContainer {
+    padding: 0 20px;
+    height: 70px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .backLink {
+    font-size: 12px;
+  }
+
+  .backIcon {
+    font-size: 16px;
+  }
+
+  .spacer {
+    width: 60px;
+  }
+
+  .main {
+    padding-top: 70px;
+  }
+
+  .container {
+    padding: 40px 20px;
+  }
+
+  .content {
+    gap: 48px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .benefits {
+    gap: 28px;
+  }
+
+  .benefit {
+    gap: 16px;
+  }
+
+  .benefitIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .benefitTitle {
+    font-size: 15px;
+  }
+
+  .benefitText {
+    font-size: 12px;
+  }
+
+  .formSection {
+    padding: 36px 24px;
+  }
+
+  .formTitle {
+    font-size: 24px;
+  }
+
+  .form {
+    gap: 24px;
+  }
+
+  .input,
+  .textarea {
+    padding: 13px 14px;
+    font-size: 14px;
+  }
+
+  .submitButton {
+    padding: 15px;
+    font-size: 12px;
+  }
+
+  .successIcon {
+    width: 70px;
+    height: 70px;
+    font-size: 42px;
+  }
+
+  .successTitle {
+    font-size: 24px;
+  }
+
+  .successText {
+    font-size: 13px;
+  }
+
+  .newMessageButton {
+    font-size: 12px;
+  }
+}

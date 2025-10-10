@@ -1,0 +1,203 @@
+/* Container Principal */
+.ctaSection {
+  padding: 160px 0;
+  background-color: #1A1A1A;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #FFFFFF 50%,
+    transparent
+  );
+  opacity: 0.1;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Conteúdo */
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Título */
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #FFFFFF;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+/* Descrição */
+.description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #E5E5E5;
+  margin: 0;
+  font-weight: 400;
+  max-width: 600px;
+  letter-spacing: 0.3px;
+}
+
+/* CTA Button */
+.ctaButton {
+  margin-top: 16px;
+  padding: 20px 48px;
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: 0.5px;
+}
+
+.ctaButton:hover {
+  background-color: #F5F5F5;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.15);
+}
+
+.ctaIcon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .ctaIcon {
+  transform: translateX(4px);
+}
+
+/* Responsividade Desktop Pequeno */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 42px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .ctaButton {
+    padding: 18px 44px;
+    font-size: 13px;
+  }
+}
+
+/* Responsividade Tablet */
+@media (max-width: 768px) {
+  .ctaSection {
+    padding: 120px 0;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .content {
+    gap: 28px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ctaButton {
+    width: 100%;
+    justify-content: center;
+    padding: 18px 40px;
+  }
+}
+
+/* Responsividade Mobile */
+@media (max-width: 480px) {
+  .ctaSection {
+    padding: 100px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .content {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .ctaButton {
+    padding: 16px 36px;
+    font-size: 13px;
+  }
+
+  .ctaIcon {
+    font-size: 18px;
+  }
+}
+
+/* Efeito adicional no hover para desktop */
+@media (min-width: 769px) {
+  .ctaButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  .ctaButton {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ctaButton:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Hover desabilitado em touch devices */
+@media (hover: none) {
+  .ctaButton:hover {
+    transform: none;
+  }
+}

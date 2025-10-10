@@ -1,0 +1,150 @@
+/* Container Principal */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #E5E5E5;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Menu Desktop */
+.menu {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+
+.menuLink {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1A1A;
+  transition: color 0.3s ease;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+
+.menuLink::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #1A1A1A;
+  transition: width 0.3s ease;
+}
+
+.menuLink:hover {
+  color: #000000;
+}
+
+.menuLink:hover::after {
+  width: 100%;
+}
+
+/* Hamburguer Mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background-color: #1A1A1A;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Menu Mobile */
+.mobileMenu {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E5E5E5;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mobileMenu.open {
+  max-height: 400px;
+}
+
+.mobileMenuList {
+  padding: 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobileMenuLink {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1A1A1A;
+  transition: color 0.3s ease;
+  display: block;
+  letter-spacing: 0.5px;
+}
+
+.mobileMenuLink:hover {
+  color: #000000;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+    height: 70px;
+    justify-content: flex-end;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobileMenuList {
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 20px;
+  }
+}
