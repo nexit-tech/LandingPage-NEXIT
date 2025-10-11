@@ -1,8 +1,10 @@
 /* Container Principal */
 .portfolio {
   padding: 120px 0;
-  background-color: #FFFFFF;
+  background-color: transparent;
   position: relative;
+  opacity: 1;
+  transition: opacity 0.6s ease;
 }
 
 .container {
@@ -25,6 +27,11 @@
   color: #1A1A1A;
   letter-spacing: -1px;
   margin: 0 0 16px;
+  transition: color 0.6s ease !important;
+}
+
+body.dark-theme .title {
+  color: #FFFFFF !important;
 }
 
 .subtitle {
@@ -34,6 +41,11 @@
   margin: 0;
   font-weight: 400;
   letter-spacing: 0.3px;
+  transition: color 0.6s ease !important;
+}
+
+body.dark-theme .subtitle {
+  color: #E5E5E5 !important;
 }
 
 /* Grid de Projetos */
@@ -51,9 +63,15 @@
   border: 1px solid #E5E5E5;
   border-radius: 2px;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.4s ease, background-color 0.6s ease, border-color 0.6s ease !important;
   position: relative;
   min-height: 220px;
+}
+
+/* Dark Theme - Card */
+body.dark-theme .projectCard {
+  background-color: rgba(26, 26, 26, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
 .projectCard::after {
@@ -66,7 +84,11 @@
   background-color: #1A1A1A;
   transform: scaleY(0);
   transform-origin: top;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, background-color 0.6s ease !important;
+}
+
+body.dark-theme .projectCard::after {
+  background-color: #FFFFFF !important;
 }
 
 .projectCard:hover {
@@ -75,19 +97,31 @@
   border-color: #1A1A1A;
 }
 
+body.dark-theme .projectCard:hover {
+  box-shadow: -8px 8px 32px rgba(0, 0, 0, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: rgba(26, 26, 26, 0.95) !important;
+}
+
 .projectCard:hover::after {
   transform: scaleY(1);
 }
 
 /* Seção da Logo */
 .logoSection {
-  background-color: #FFFFFF;
+  background-color: #FAFAFA;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 32px;
   position: relative;
   border-right: 1px solid #E5E5E5;
+  transition: all 0.6s ease !important;
+}
+
+body.dark-theme .logoSection {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .logoContainer {
@@ -95,6 +129,8 @@
   width: 120px;
   height: 120px;
   transition: transform 0.4s ease;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .projectCard:hover .logoContainer {
@@ -132,12 +168,23 @@
   padding: 5px 10px;
   background-color: #F5F5F5;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.6s ease !important;
+  will-change: transform;
+}
+
+body.dark-theme .category {
+  color: #E5E5E5 !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .projectCard:hover .category {
-  background-color: #1A1A1A;
-  color: #FFFFFF;
+  background-color: #1A1A1A !important;
+  color: #FFFFFF !important;
+}
+
+body.dark-theme .projectCard:hover .category {
+  background-color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 .arrowIcon {
@@ -150,13 +197,24 @@
   border-radius: 2px;
   font-size: 16px;
   color: #1A1A1A;
-  transition: all 0.4s ease;
+  transition: all 0.6s ease !important;
+  will-change: transform;
+}
+
+body.dark-theme .arrowIcon {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #FFFFFF !important;
 }
 
 .projectCard:hover .arrowIcon {
-  background-color: #1A1A1A;
-  color: #FFFFFF;
+  background-color: #1A1A1A !important;
+  color: #FFFFFF !important;
   transform: translateX(4px);
+}
+
+body.dark-theme .projectCard:hover .arrowIcon {
+  background-color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Nome do Projeto */
@@ -167,6 +225,11 @@
   color: #1A1A1A;
   margin: 0 0 6px;
   letter-spacing: -0.4px;
+  transition: color 0.6s ease !important;
+}
+
+body.dark-theme .projectName {
+  color: #FFFFFF !important;
 }
 
 /* Cliente */
@@ -176,6 +239,11 @@
   color: #6B6B6B;
   margin: 0 0 16px;
   letter-spacing: 0.3px;
+  transition: color 0.6s ease !important;
+}
+
+body.dark-theme .client {
+  color: #E5E5E5 !important;
 }
 
 /* Container do Resultado */
@@ -185,12 +253,22 @@
   background-color: #F5F5F5;
   border-radius: 2px;
   border-left: 2px solid #E5E5E5;
-  transition: all 0.4s ease;
+  transition: all 0.6s ease !important;
+}
+
+body.dark-theme .resultContainer {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  border-left: 2px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .projectCard:hover .resultContainer {
-  background-color: #FAFAFA;
-  border-left-color: #1A1A1A;
+  background-color: #FAFAFA !important;
+  border-left-color: #1A1A1A !important;
+}
+
+body.dark-theme .projectCard:hover .resultContainer {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-left-color: #FFFFFF !important;
 }
 
 .resultLabel {
@@ -201,6 +279,11 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-bottom: 5px;
+  transition: color 0.6s ease !important;
+}
+
+body.dark-theme .resultLabel {
+  color: #E5E5E5 !important;
 }
 
 .result {
@@ -210,6 +293,11 @@
   color: #1A1A1A;
   margin: 0;
   letter-spacing: -0.2px;
+  transition: color 0.6s ease !important;
+}
+
+body.dark-theme .result {
+  color: #FFFFFF !important;
 }
 
 /* Contexto */
@@ -223,6 +311,11 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.6s ease !important;
+}
+
+body.dark-theme .context {
+  color: #E5E5E5 !important;
 }
 
 /* Tech Stack */
@@ -242,12 +335,24 @@
   padding: 5px 10px;
   border-radius: 2px;
   letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  transition: all 0.6s ease !important;
+  will-change: transform;
+}
+
+body.dark-theme .techTag {
+  color: #FFFFFF !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .projectCard:hover .techTag {
-  border-color: #1A1A1A;
-  background-color: #F5F5F5;
+  border-color: #1A1A1A !important;
+  background-color: #F5F5F5 !important;
+}
+
+body.dark-theme .projectCard:hover .techTag {
+  border-color: #FFFFFF !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Responsividade Desktop Médio */
@@ -306,6 +411,10 @@
     padding: 48px 32px;
     border-right: none;
     border-bottom: 1px solid #E5E5E5;
+  }
+
+  body.dark-theme .logoSection {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
   .logoContainer {

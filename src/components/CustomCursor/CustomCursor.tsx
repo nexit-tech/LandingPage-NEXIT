@@ -26,7 +26,7 @@ export default function CustomCursor() {
 
     const animateCursor = () => {
       // Suavização com interpolação
-      const speed = 0.15
+      const speed = 1.5
       cursorX += (mouseX - cursorX) * speed
       cursorY += (mouseY - cursorY) * speed
 

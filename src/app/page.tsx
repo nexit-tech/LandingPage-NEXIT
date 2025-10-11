@@ -5,11 +5,13 @@ import Portfolio from '@/components/Portfolio/Portfolio'
 import CTASection from '@/components/CTASection/CTASection'
 import Footer from '@/components/Footer/Footer'
 import CustomCursor from '@/components/CustomCursor/CustomCursor'
+import BackgroundMorph from '@/components/BackgroundMorph/BackgroundMorph'
 
 export default function Home() {
   return (
     <>
       <CustomCursor />
+      <BackgroundMorph />
       <main>
         {/* Navegação */}
         <Navbar />

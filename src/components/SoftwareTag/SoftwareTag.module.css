@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 8px 12px;
   background-color: #1A1A1A;
   color: #FFFFFF;
   border-radius: 4px;
@@ -12,6 +12,7 @@
   text-transform: uppercase;
   transition: all 0.3s ease;
   border: 1px solid #1A1A1A;
+  width: fit-content;
 }
 
 .tag:hover {
@@ -22,17 +23,64 @@
 
 .icon {
   font-size: 16px;
+  animation: iconPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .text {
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 16px;
+  white-space: nowrap;
+}
+
+/* Cursor piscando - PRETO E BRANCO */
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.8s step-end infinite;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+/* Quando completar a digitação, cursor pisca mais devagar */
+.cursor.complete {
+  animation: blinkSlow 1.2s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes blinkSlow {
+  0%, 70% {
+    opacity: 1;
+  }
+  71%, 100% {
+    opacity: 0;
+  }
 }
 
 /* Responsividade Mobile */
 @media (max-width: 480px) {
   .tag {
     font-size: 10px;
-    padding: 7px 14px;
+    padding: 7px 10px;
     gap: 6px;
   }
 

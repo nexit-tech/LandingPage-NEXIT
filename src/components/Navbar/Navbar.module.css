@@ -1,40 +1,56 @@
-/* Container Principal */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #E5E5E5;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(229, 229, 229, 0.6);
+  border-radius: 50px;
   z-index: 1000;
-  transition: all 0.3s ease;
+  padding: 12px 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.6s ease, border 0.6s ease, box-shadow 0.6s ease;
+  will-change: transform, opacity;
+}
+
+.navbar.hidden {
+  pointer-events: none;
+}
+
+.navbar.dark {
+  background-color: rgba(26, 26, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
-  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Menu Desktop */
 .menu {
   display: flex;
-  gap: 48px;
+  gap: 40px;
   align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .menuLink {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #1A1A1A;
   transition: color 0.3s ease;
-  position: relative;
   letter-spacing: 0.5px;
+  text-decoration: none;
+  position: relative;
+}
+
+.navbar.dark .menuLink {
+  color: #FFFFFF;
 }
 
 .menuLink::after {
@@ -48,21 +64,21 @@
   transition: width 0.3s ease;
 }
 
-.menuLink:hover {
-  color: #000000;
+.navbar.dark .menuLink::after {
+  background-color: #FFFFFF;
 }
 
 .menuLink:hover::after {
   width: 100%;
 }
 
-/* Hamburguer Mobile */
 .hamburger {
   display: none;
   flex-direction: column;
   gap: 5px;
   background: transparent;
   padding: 8px;
+  border: none;
   cursor: pointer;
 }
 
@@ -71,6 +87,11 @@
   height: 2px;
   background-color: #1A1A1A;
   transition: all 0.3s ease;
+  display: block;
+}
+
+.navbar.dark .hamburger span {
+  background-color: #FFFFFF;
 }
 
 .hamburger.active span:nth-child(1) {
@@ -85,48 +106,79 @@
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* Menu Mobile */
 .mobileMenu {
   position: fixed;
   top: 80px;
-  left: 0;
-  right: 0;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #E5E5E5;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(229, 229, 229, 0.6);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  z-index: 999;
+  transition: all 0.3s ease;
+  animation: slideDown 0.3s ease forwards;
 }
 
-.mobileMenu.open {
-  max-height: 400px;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.mobileMenu.dark {
+  background-color: rgba(26, 26, 26, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .mobileMenuList {
-  padding: 24px 40px;
+  padding: 24px 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
 }
 
 .mobileMenuLink {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: #1A1A1A;
   transition: color 0.3s ease;
-  display: block;
   letter-spacing: 0.5px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.mobileMenu.dark .mobileMenuLink {
+  color: #FFFFFF;
 }
 
 .mobileMenuLink:hover {
   color: #000000;
 }
 
-/* Responsividade */
+.mobileMenu.dark .mobileMenuLink:hover {
+  color: #E5E5E5;
+}
+
 @media (max-width: 768px) {
+  .navbar {
+    top: 16px;
+    width: calc(100% - 48px);
+    max-width: 500px;
+    padding: 10px 24px;
+  }
+
   .container {
-    padding: 0 24px;
-    height: 70px;
     justify-content: flex-end;
   }
 
@@ -144,7 +196,9 @@
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 0 20px;
+  .navbar {
+    top: 12px;
+    width: calc(100% - 32px);
+    padding: 8px 20px;
   }
 }

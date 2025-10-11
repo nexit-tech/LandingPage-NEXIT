@@ -1,9 +1,10 @@
 /* Container Principal */
 .ctaSection {
   padding: 160px 0;
-  background-color: #1A1A1A;
+  background-color: transparent;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .ctaSection::before {
@@ -16,10 +17,10 @@
   background: linear-gradient(
     to right,
     transparent,
-    #FFFFFF 50%,
+    rgba(255, 255, 255, 0.3) 50%,
     transparent
   );
-  opacity: 0.1;
+  opacity: 0.5;
 }
 
 .container {
@@ -74,6 +75,7 @@
   align-items: center;
   gap: 12px;
   letter-spacing: 0.5px;
+  text-decoration: none;
 }
 
 .ctaButton:hover {
