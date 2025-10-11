@@ -1,6 +1,8 @@
 'use client'
 
-import { HiSparkles, HiArrowTrendingUp, HiEye, HiRocketLaunch } from 'react-icons/hi2'
+import { HiRocketLaunch } from 'react-icons/hi2'
+import { TbTargetArrow, TbLayoutGrid } from "react-icons/tb";
+import { FaCode } from "react-icons/fa";
 import gsap from 'gsap'
 import ScrollReveal from '@/components/ScrollReveal/ScrollReveal'
 import styles from './Methodology.module.css'
@@ -10,27 +12,27 @@ export default function Methodology() {
   const pillars = [
     {
       id: 1,
-      icon: HiSparkles,
-      title: 'Simplificação Estratégica',
-      description: 'Reduzimos processos ao essencial, eliminando etapas desnecessárias e criando fluxos enxutos. Cada automação é projetada para integrar-se naturalmente ao seu negócio sem fricção.'
+      icon: TbTargetArrow,
+      title: 'Imersão e Estratégia',
+      description: 'Mergulhamos no seu negócio para definir objetivos, entender seu público e traçar o plano mestre do projeto.'
     },
     {
       id: 2,
-      icon: HiArrowTrendingUp,
-      title: 'Escalabilidade Planejada',
-      description: 'Construímos sistemas que crescem com sua operação, sem necessidade de reconstrução. Sua solução permanece eficiente independentemente do volume de demanda.'
+      icon: TbLayoutGrid,
+      title: 'Design de Experiência (UI/UX)',
+      description: 'Desenhamos uma interface intuitiva e visualmente atraente, focada em transformar visitantes em clientes.'
     },
     {
       id: 3,
-      icon: HiEye,
-      title: 'Transparência Total',
-      description: 'Você acompanha cada etapa do desenvolvimento com métricas claras e comunicação direta. Sem caixas-pretas, apenas resultados documentados e rastreáveis.'
+      icon: FaCode,
+      title: 'Implementação e Tecnologia',
+      description: 'Codificamos o design com as melhores tecnologias para garantir um site ou aplicativo rápido, responsivo e seguro em qualquer tela.'
     },
     {
       id: 4,
       icon: HiRocketLaunch,
-      title: 'Implementação Ágil',
-      description: 'Entregas iterativas que geram valor desde a primeira semana. Você vê impacto real rapidamente, sem longos períodos de espera.'
+      title: 'Otimização Contínua',
+      description: 'Após o lançamento, monitoramos os dados de uso para aprimorar o projeto constantemente, assegurando um crescimento sustentável.'
     }
   ]
 
