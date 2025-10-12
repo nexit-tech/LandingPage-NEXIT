@@ -9,12 +9,12 @@
   top: -6px;
   left: -6px;
   will-change: transform;
-  transition: background-color 0.6s ease;
+  transition: background-color 0.3s ease;
 }
 
-/* Cursor branco no dark theme */
-body.dark-theme .cursor {
-  background-color: #FFFFFF;
+/* Cursor BRANCO quando na seção dark */
+.cursor.white {
+  background-color: #FFFFFF !important;
 }
 
 @media (max-width: 768px) {

@@ -1,34 +1,37 @@
-import type { Metadata } from 'next'
-import { Roboto_Mono, Rubik_Mono_One } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import { Roboto_Mono, Rubik_Mono_One } from "next/font/google";
+import "./globals.css";
+import CustomCursor from "@/components/CustomCursor/CustomCursor";
+import BackgroundMorph from "@/components/BackgroundMorph/BackgroundMorph";
 
 const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-roboto-mono',
-})
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+});
 
 const rubikMonoOne = Rubik_Mono_One({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-rubik-mono-one',
-})
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-rubik-mono-one",
+});
 
 export const metadata: Metadata = {
-  title: 'NEXIT - Sua Próxima Saída Para Automação Inteligente',
-  description: 'Transformamos processos complexos em fluxos automatizados que escalam seu negócio. Soluções personalizadas que entregam resultados mensuráveis.',
-}
+  title: "NEXIT - Automação Inteligente",
+  description: "Transformamos processos complexos em fluxos automatizados",
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="pt-BR">
       <body className={`${robotoMono.variable} ${rubikMonoOne.variable}`}>
+        <CustomCursor />
+        <BackgroundMorph />
         {children}
       </body>
     </html>
-  )
+  );
 }

@@ -28,8 +28,8 @@ export default function Navbar() {
         const heroRect = heroSection.getBoundingClientRect()
         const heroBottom = heroRect.bottom
         
-        // Navbar aparece quando sair do Hero
-        if (heroBottom <= 100) {
+        // Navbar aparece APENAS quando sair COMPLETAMENTE do Hero
+        if (heroBottom <= 0) {
           if (!isVisible) {
             setIsVisible(true)
             // Animação de entrada com GSAP
@@ -74,7 +74,7 @@ export default function Navbar() {
       }
     }
 
-    handleScroll()
+    // NÃO chama handleScroll() no início - deixa navbar invisível no load
     window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
@@ -87,6 +87,7 @@ export default function Navbar() {
       <nav 
         ref={navRef}
         className={`${styles.navbar} ${isDark ? styles.dark : ''} ${!isVisible ? styles.hidden : ''}`}
+        style={{ opacity: 0 }} // Começa invisível
       >
         <div className={styles.container}>
           <ul className={styles.menu}>

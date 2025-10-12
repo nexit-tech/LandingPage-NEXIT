@@ -12,6 +12,9 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: background-color 0.6s ease, border 0.6s ease, box-shadow 0.6s ease;
   will-change: transform, opacity;
+  /* Começa invisível e fora da tela */
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100px);
 }
 
 .navbar.hidden {

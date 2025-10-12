@@ -1,12 +1,21 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function BackgroundMorph() {
   const [currentBg, setCurrentBg] = useState('#FFFFFF')
+  const pathname = usePathname()
 
   useEffect(() => {
-    // Mapeamento de seções e suas cores
+    // NÃO EXECUTA NO LEAD-CAPTURE
+    if (pathname === '/lead-capture') {
+      // Garante que o background seja branco/padrão
+      document.body.style.backgroundColor = '#FAFAFA'
+      document.body.classList.remove('dark-theme')
+      return
+    }
+
     const sections = [
       { id: 'hero', color: '#FFFFFF', theme: 'light' },
       { id: 'metodologia', color: '#F5F5F5', theme: 'light' },
@@ -33,17 +42,14 @@ export default function BackgroundMorph() {
               setCurrentBg(section.color)
               document.body.style.backgroundColor = section.color
               
-              // Adiciona classe de tema ao body
               if (section.theme === 'dark') {
                 document.body.classList.add('dark-theme')
                 
-                // Esconde o portfolio quando na seção dark
                 if (portfolioSection) {
                   portfolioSection.style.opacity = '0'
                   portfolioSection.style.pointerEvents = 'none'
                 }
                 
-                // Esconde APENAS o conteúdo do footer (não a borda)
                 if (footerContent) {
                   footerContent.style.opacity = '0'
                   footerContent.style.pointerEvents = 'none'
@@ -51,13 +57,11 @@ export default function BackgroundMorph() {
               } else {
                 document.body.classList.remove('dark-theme')
                 
-                // Mostra o portfolio quando NÃO está na seção dark
                 if (portfolioSection) {
                   portfolioSection.style.opacity = '1'
                   portfolioSection.style.pointerEvents = 'auto'
                 }
                 
-                // Mostra o conteúdo do footer quando NÃO está na seção dark
                 if (footerContent) {
                   footerContent.style.opacity = '1'
                   footerContent.style.pointerEvents = 'auto'
@@ -70,16 +74,13 @@ export default function BackgroundMorph() {
       }
     }
 
-    // Define cor inicial
     handleScroll()
-
-    // Adiciona listener de scroll
     window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [currentBg])
+  }, [currentBg, pathname])
 
   return null
 }

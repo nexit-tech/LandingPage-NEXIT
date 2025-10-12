@@ -21,7 +21,6 @@
   min-height: calc(100vh - 80px);
 }
 
-/* Conteúdo */
 .content {
   max-width: 900px;
   text-align: center;
@@ -31,7 +30,6 @@
   gap: 32px;
 }
 
-/* Headline */
 .headline {
   font-size: 48px;
   font-weight: 400;
@@ -41,7 +39,6 @@
   margin: 0;
 }
 
-/* Subheadline */
 .subheadline {
   font-size: 16px;
   line-height: 1.8;
@@ -52,7 +49,6 @@
   letter-spacing: 0.3px;
 }
 
-/* Grupo de CTAs */
 .ctaGroup {
   display: flex;
   gap: 20px;
@@ -61,7 +57,9 @@
   justify-content: center;
 }
 
-/* CTA Primário */
+/* ========================================
+   BOTÃO PRIMÁRIO - EFEITO SCAN + BORDA
+   ======================================== */
 .primaryCta {
   padding: 18px 40px;
   background-color: #1A1A1A;
@@ -69,20 +67,60 @@
   font-size: 14px;
   font-weight: 600;
   border-radius: 2px;
-  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s ease;
+}
+
+.primaryCta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+
+.primaryCta:hover::before {
+  left: 100%;
+}
+
+.primaryCta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #FFFFFF;
+  transition: width 0.4s ease;
+}
+
+.primaryCta:hover::after {
+  width: 100%;
 }
 
 .primaryCta:hover {
-  background-color: #000000;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* CTA Secundário */
+/* ========================================
+   BOTÃO SECUNDÁRIO - GEOMETRIC LINES
+   ======================================== */
 .secondaryCta {
   padding: 18px 40px;
   background-color: transparent;
@@ -91,34 +129,80 @@
   font-weight: 600;
   border: 2px solid #1A1A1A;
   border-radius: 2px;
-  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Preenchimento gradual de baixo para cima */
+.secondaryCta::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: #1A1A1A;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.secondaryCta:hover::before {
+  height: 100%;
 }
 
 .secondaryCta:hover {
-  background-color: #1A1A1A;
   color: #FFFFFF;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Linhas geométricas decorativas - TOP */
+.secondaryCta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to left, #1A1A1A, transparent);
+  transition: width 0.4s ease 0.1s;
+}
+
+.secondaryCta:hover::after {
+  width: 60%;
+}
+
+/* Ícones dos Botões */
 .ctaIcon {
   font-size: 18px;
   transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 .primaryCta:hover .ctaIcon {
   transform: translateX(4px);
+  animation: arrowPulse 0.6s ease infinite;
 }
 
 .secondaryCta:hover .ctaIcon {
-  transform: translateY(2px);
+  animation: none; /* Removido bounce - GSAP controla */
 }
 
-/* Indicador de Scroll - DENTRO DO FLUXO DO CONTEÚDO */
+@keyframes arrowPulse {
+  0%, 100% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+/* Indicador de Scroll */
 .scrollIndicator {
   display: flex;
   flex-direction: column;
@@ -143,7 +227,6 @@
   animation: scrollAnimation 2s ease-in-out infinite;
 }
 
-/* Animação do Indicador */
 @keyframes scrollAnimation {
   0%, 100% {
     opacity: 0;
@@ -260,5 +343,17 @@
 
   .scrollIndicator {
     margin-top: 32px;
+  }
+}
+
+/* Desabilita animações em touch devices */
+@media (hover: none) {
+  .primaryCta:hover,
+  .secondaryCta:hover {
+    transform: none;
+  }
+  
+  .primaryCta:hover .ctaIcon {
+    animation: none;
   }
 }

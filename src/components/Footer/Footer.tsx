@@ -2,15 +2,13 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { HiEnvelope, HiPhone, HiMapPin } from 'react-icons/hi2'
+import { HiEnvelope, HiPhone, HiMapPin, HiSparkles } from 'react-icons/hi2'
 import { FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa'
-import { useRef } from 'react'
 import gsap from 'gsap'
 import ScrollReveal from '@/components/ScrollReveal/ScrollReveal'
 import styles from './Footer.module.css'
 
 export default function Footer() {
-  // Ano atual
   const currentYear = new Date().getFullYear()
 
   // Links
@@ -33,36 +31,40 @@ export default function Footer() {
     { icon: HiMapPin, label: 'Cabo Frio - Rio de Janeiro, RJ', href: null }
   ]
 
-  // Animação da logo
+  // ========================================
+  // ANIMAÇÕES GSAP
+  // ========================================
+
+  // Logo Hover - Rotação 3D
   const handleLogoHover = (e: React.MouseEvent<HTMLAnchorElement>, entering: boolean) => {
     const logo = e.currentTarget.querySelector('img')
     
     if (entering) {
       gsap.to(logo, {
-        scale: 1.05,
-        rotateZ: 5,
-        duration: 0.4,
-        ease: 'back.out(2)'
+        rotateY: 360,
+        scale: 1.03,
+        duration: 0.8,
+        ease: 'power2.out'
       })
     } else {
       gsap.to(logo, {
+        rotateY: 0,
         scale: 1,
-        rotateZ: 0,
-        duration: 0.3,
+        duration: 0.5,
         ease: 'power2.out'
       })
     }
   }
 
-  // Animação dos ícones de contato
+  // Ícone de Contato - Pulso
   const handleContactIconHover = (e: React.MouseEvent<HTMLDivElement>, entering: boolean) => {
     const icon = e.currentTarget
 
     if (entering) {
       gsap.to(icon, {
         scale: 1.15,
-        rotation: 360,
-        duration: 0.5,
+        rotation: 5,
+        duration: 0.3,
         ease: 'back.out(2)'
       })
     } else {
@@ -75,53 +77,52 @@ export default function Footer() {
     }
   }
 
-  // Animação dos links rápidos
+  // Link Rápido - Slide
   const handleLinkHover = (e: React.MouseEvent<HTMLAnchorElement>, entering: boolean) => {
     const link = e.currentTarget
 
     if (entering) {
       gsap.to(link, {
-        x: 10,
-        color: '#1A1A1A',
+        paddingLeft: 16,
         duration: 0.3,
         ease: 'power2.out'
       })
     } else {
       gsap.to(link, {
-        x: 0,
-        color: '#6B6B6B',
+        paddingLeft: 0,
         duration: 0.3,
         ease: 'power2.out'
       })
     }
   }
 
-  // Animação das redes sociais - efeito magnético
+  // Social Link - Bounce + Rotação
   const handleSocialHover = (e: React.MouseEvent<HTMLAnchorElement>, entering: boolean) => {
     const link = e.currentTarget
-    const iconWrapper = link.querySelector(`.${styles.socialIconWrapper}`)
-    const text = link.querySelector('span')
+    const icon = link.querySelector(`.${styles.socialIcon}`)
 
     if (entering) {
-      gsap.to(iconWrapper, {
+      gsap.to(icon, {
         scale: 1.2,
-        rotation: -10,
+        rotation: -5,
         duration: 0.4,
         ease: 'elastic.out(1, 0.5)'
       })
-      gsap.to(text, {
-        x: 5,
+
+      gsap.to(link, {
+        x: 4,
         duration: 0.3,
         ease: 'power2.out'
       })
     } else {
-      gsap.to(iconWrapper, {
+      gsap.to(icon, {
         scale: 1,
         rotation: 0,
         duration: 0.4,
         ease: 'elastic.out(1, 0.5)'
       })
-      gsap.to(text, {
+
+      gsap.to(link, {
         x: 0,
         duration: 0.3,
         ease: 'power2.out'
@@ -129,21 +130,53 @@ export default function Footer() {
     }
   }
 
-  // Animação do tagline
+  // Tech Badge - Pulse
+  const handleBadgeHover = (e: React.MouseEvent<HTMLDivElement>, entering: boolean) => {
+    const badge = e.currentTarget
+    const icon = badge.querySelector(`.${styles.badgeIcon}`)
+
+    if (entering) {
+      gsap.to(badge, {
+        y: -2,
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+
+      gsap.to(icon, {
+        rotation: 360,
+        duration: 0.6,
+        ease: 'power2.out'
+      })
+    } else {
+      gsap.to(badge, {
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+
+      gsap.to(icon, {
+        rotation: 0,
+        duration: 0.4,
+        ease: 'power2.out'
+      })
+    }
+  }
+
+  // Tagline Hover - Glow
   const handleTaglineHover = (e: React.MouseEvent<HTMLParagraphElement>, entering: boolean) => {
     const tagline = e.currentTarget
 
     if (entering) {
       gsap.to(tagline, {
-        scale: 1.02,
-        letterSpacing: '0.5px',
-        duration: 0.4,
+        scale: 1.01,
+        opacity: 1,
+        duration: 0.3,
         ease: 'power2.out'
       })
     } else {
       gsap.to(tagline, {
         scale: 1,
-        letterSpacing: '0.3px',
+        opacity: 0.9,
         duration: 0.3,
         ease: 'power2.out'
       })
@@ -153,13 +186,31 @@ export default function Footer() {
   return (
     <footer id="contato" className={styles.footer}>
       <div className={styles.container}>
-        {/* Wrapper para o conteúdo que vai desaparecer */}
         <div className="footer-content">
-          {/* Main Grid - Logo e Tagline lado a lado */}
+          {/* Grid Principal - 3 Colunas */}
           <div className={styles.mainGrid}>
-            {/* Lado Esquerdo: Tagline */}
+            
+            {/* COLUNA 1 - BRANDING */}
             <ScrollReveal direction="up" delay={100}>
               <div className={styles.brandColumn}>
+                <div className={styles.logoWrapper}>
+                  <Link 
+                    href="/" 
+                    className={styles.logoLink}
+                    onMouseEnter={(e) => handleLogoHover(e, true)}
+                    onMouseLeave={(e) => handleLogoHover(e, false)}
+                  >
+                    <Image
+                      src="/logo/nexitlogo.png"
+                      alt="NEXIT Logo"
+                      width={100}
+                      height={100}
+                      className={styles.logo}
+                      priority
+                    />
+                  </Link>
+                </div>
+                
                 <p 
                   className={styles.tagline}
                   onMouseEnter={(e) => handleTaglineHover(e, true)}
@@ -170,90 +221,61 @@ export default function Footer() {
               </div>
             </ScrollReveal>
 
-            {/* Lado Direito: Logo */}
-            <ScrollReveal direction="up" delay={150}>
-              <div className={styles.logoColumn}>
-                <Link 
-                  href="/" 
-                  className={styles.logoLink}
-                  onMouseEnter={(e) => handleLogoHover(e, true)}
-                  onMouseLeave={(e) => handleLogoHover(e, false)}
-                >
-                  <Image
-                    src="/logo/nexitlogo.png"
-                    alt="NEXIT Logo"
-                    width={200}
-                    height={67}
-                    className={styles.logo}
-                    priority
-                  />
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
+            {/* COLUNA 2 - CONTATO + LINKS */}
+            <ScrollReveal direction="up" delay={200}>
+              <div className={styles.contactColumn}>
+                {/* Contato */}
+                <div>
+                  <h4 className={styles.sectionTitle}>Contato</h4>
+                  <ul className={styles.contactList}>
+                    {contactInfo.map((item, index) => {
+                      const IconComponent = item.icon
+                      return (
+                        <li key={index} className={styles.contactItem}>
+                          <div 
+                            onMouseEnter={(e) => handleContactIconHover(e, true)}
+                            onMouseLeave={(e) => handleContactIconHover(e, false)}
+                          >
+                            <IconComponent className={styles.contactIcon} />
+                          </div>
+                          {item.href ? (
+                            <a href={item.href} className={styles.contactLink}>
+                              {item.label}
+                            </a>
+                          ) : (
+                            <span className={styles.contactText}>{item.label}</span>
+                          )}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
 
-          {/* Divisor com gradiente */}
-          <ScrollReveal direction="fade" delay={200}>
-            <div className={styles.divider}></div>
-          </ScrollReveal>
-
-          {/* Grid de Colunas */}
-          <div className={styles.columnsGrid}>
-            {/* Coluna 1: Contato */}
-            <ScrollReveal direction="up" delay={250}>
-              <div className={styles.column}>
-                <h4 className={styles.columnTitle}>Contato</h4>
-                <ul className={styles.contactList}>
-                  {contactInfo.map((item, index) => {
-                    const IconComponent = item.icon
-                    return (
-                      <li key={index} className={styles.contactItem}>
-                        <div 
-                          className={styles.iconWrapper}
-                          onMouseEnter={(e) => handleContactIconHover(e, true)}
-                          onMouseLeave={(e) => handleContactIconHover(e, false)}
+                {/* Links Rápidos */}
+                <div>
+                  <h4 className={styles.sectionTitle}>Links Rápidos</h4>
+                  <ul className={styles.linkList}>
+                    {quickLinks.map((link, index) => (
+                      <li key={index}>
+                        <a 
+                          href={link.href} 
+                          className={styles.link}
+                          onMouseEnter={(e) => handleLinkHover(e, true)}
+                          onMouseLeave={(e) => handleLinkHover(e, false)}
                         >
-                          <IconComponent className={styles.contactIcon} />
-                        </div>
-                        {item.href ? (
-                          <a href={item.href} className={styles.contactLink}>
-                            {item.label}
-                          </a>
-                        ) : (
-                          <span className={styles.contactText}>{item.label}</span>
-                        )}
+                          {link.label}
+                        </a>
                       </li>
-                    )
-                  })}
-                </ul>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </ScrollReveal>
 
-            {/* Coluna 2: Links Rápidos */}
+            {/* COLUNA 3 - REDES SOCIAIS */}
             <ScrollReveal direction="up" delay={300}>
-              <div className={styles.column}>
-                <h4 className={styles.columnTitle}>Links Rápidos</h4>
-                <ul className={styles.linkList}>
-                  {quickLinks.map((link, index) => (
-                    <li key={index}>
-                      <a 
-                        href={link.href} 
-                        className={styles.link}
-                        onMouseEnter={(e) => handleLinkHover(e, true)}
-                        onMouseLeave={(e) => handleLinkHover(e, false)}
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </ScrollReveal>
-
-            {/* Coluna 3: Redes Sociais */}
-            <ScrollReveal direction="up" delay={350}>
-              <div className={styles.column}>
-                <h4 className={styles.columnTitle}>Redes Sociais</h4>
+              <div className={styles.socialColumn}>
+                <h4 className={styles.sectionTitle}>Redes Sociais</h4>
                 <ul className={styles.socialList}>
                   {socialLinks.map((link, index) => {
                     const IconComponent = link.icon
@@ -268,9 +290,7 @@ export default function Footer() {
                           onMouseEnter={(e) => handleSocialHover(e, true)}
                           onMouseLeave={(e) => handleSocialHover(e, false)}
                         >
-                          <div className={styles.socialIconWrapper}>
-                            <IconComponent className={styles.socialIcon} />
-                          </div>
+                          <IconComponent className={styles.socialIcon} />
                           <span>{link.label}</span>
                         </a>
                       </li>
@@ -292,6 +312,15 @@ export default function Footer() {
               <p className={styles.copyright}>
                 © {currentYear} NEXIT. Todos os direitos reservados.
               </p>
+
+              <div 
+                className={styles.techBadge}
+                onMouseEnter={(e) => handleBadgeHover(e, true)}
+                onMouseLeave={(e) => handleBadgeHover(e, false)}
+              >
+                <HiSparkles className={styles.badgeIcon} />
+                <span>Built with Tech</span>
+              </div>
             </div>
           </ScrollReveal>
         </div>

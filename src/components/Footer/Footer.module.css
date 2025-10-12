@@ -1,12 +1,11 @@
 /* Container Principal */
 .footer {
-  padding: 120px 0 50px;
+  padding: 80px 0 40px;
   background-color: transparent;
   color: #1A1A1A;
   position: relative;
   border-top: 1px solid rgba(229, 229, 229, 0.3);
   transition: border-color 0.6s ease;
-  min-height: 200px;
 }
 
 body.dark-theme .footer {
@@ -26,102 +25,135 @@ body.dark-theme .footer {
   opacity: 1;
 }
 
-/* Main Grid - Logo e Tagline lado a lado */
+/* ========================================
+   NOVO LAYOUT - GRID MINIMALISTA
+   ======================================== */
+
+/* Grid Principal - 3 Colunas Balanceadas */
 .mainGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 80px;
-  align-items: center;
   margin-bottom: 60px;
+  align-items: start;
 }
 
+/* ========================================
+   COLUNA 1 - BRANDING + TAGLINE
+   ======================================== */
 .brandColumn {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 24px;
 }
 
-.tagline {
-  font-size: 20px;
-  line-height: 1.6;
-  color: #6B6B6B;
-  margin: 0;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-  transition: color 0.6s ease;
-}
-
-body.dark-theme .tagline {
-  color: #E5E5E5;
-}
-
-.logoColumn {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.logoWrapper {
+  position: relative;
+  width: fit-content;
 }
 
 .logoLink {
   display: block;
-  transition: opacity 0.3s ease;
-}
-
-.logoLink:hover {
-  opacity: 0.8;
+  position: relative;
+  transition: all 0.4s ease;
 }
 
 .logo {
   object-fit: contain;
-  transition: filter 0.6s ease;
+  transition: filter 0.6s ease, transform 0.4s ease;
+  will-change: transform;
 }
 
 body.dark-theme .logo {
   filter: invert(1) brightness(1.2);
 }
 
-.divider {
+.logoLink:hover .logo {
+  transform: scale(1.03);
+}
+
+/* Linha decorativa abaixo da logo */
+.logoLink::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #1A1A1A, transparent);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-theme .logoLink::after {
+  background: linear-gradient(to right, #FFFFFF, transparent);
+}
+
+.logoLink:hover::after {
   width: 100%;
-  height: 1px;
-  background-color: #E5E5E5;
-  margin-bottom: 60px;
-  transition: background-color 0.6s ease;
 }
 
-body.dark-theme .divider {
-  background-color: rgba(255, 255, 255, 0.15);
+.tagline {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6B6B6B;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: color 0.6s ease;
+  max-width: 280px;
 }
 
-.columnsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 80px;
-  margin-bottom: 60px;
+body.dark-theme .tagline {
+  color: #E5E5E5;
 }
 
-.column {
+/* ========================================
+   COLUNA 2 - CONTATO + LINKS
+   ======================================== */
+.contactColumn {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
-.columnTitle {
-  font-size: 11px;
+.sectionTitle {
+  font-size: 10px;
   font-weight: 700;
   color: #1A1A1A;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin: 0 0 8px;
+  margin: 0 0 16px;
   transition: color 0.6s ease;
+  position: relative;
+  padding-left: 16px;
 }
 
-body.dark-theme .columnTitle {
+body.dark-theme .sectionTitle {
   color: #FFFFFF;
 }
 
+/* Linha vertical decorativa */
+.sectionTitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 100%;
+  background-color: #1A1A1A;
+  transition: background-color 0.6s ease;
+}
+
+body.dark-theme .sectionTitle::before {
+  background-color: #FFFFFF;
+}
+
+/* Lista de Contatos */
 .contactList {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -129,39 +161,21 @@ body.dark-theme .columnTitle {
 
 .contactItem {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.iconWrapper {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #F5F5F5;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+  gap: 12px;
+  transition: transform 0.3s ease;
 }
 
-body.dark-theme .iconWrapper {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.contactItem:hover .iconWrapper {
-  background-color: #1A1A1A;
-  transform: translateY(-2px);
-}
-
-body.dark-theme .contactItem:hover .iconWrapper {
-  background-color: #FFFFFF;
+.contactItem:hover {
+  transform: translateX(4px);
 }
 
 .contactIcon {
+  flex-shrink: 0;
   font-size: 16px;
   color: #1A1A1A;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform;
 }
 
 body.dark-theme .contactIcon {
@@ -169,24 +183,21 @@ body.dark-theme .contactIcon {
 }
 
 .contactItem:hover .contactIcon {
-  color: #FFFFFF;
+  transform: scale(1.15) rotate(5deg);
 }
 
-body.dark-theme .contactItem:hover .contactIcon {
-  color: #1A1A1A;
-}
-
-.contactLink {
-  font-size: 14px;
+.contactLink,
+.contactText {
+  font-size: 13px;
   color: #6B6B6B;
   transition: color 0.3s ease;
   font-weight: 400;
   letter-spacing: 0.2px;
-  padding-top: 8px;
   text-decoration: none;
 }
 
-body.dark-theme .contactLink {
+body.dark-theme .contactLink,
+body.dark-theme .contactText {
   color: #E5E5E5;
 }
 
@@ -198,31 +209,18 @@ body.dark-theme .contactLink:hover {
   color: #FFFFFF;
 }
 
-.contactText {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #6B6B6B;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-  transition: color 0.6s ease;
-  padding-top: 8px;
-}
-
-body.dark-theme .contactText {
-  color: #E5E5E5;
-}
-
+/* Lista de Links */
 .linkList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .link {
-  font-size: 14px;
+  font-size: 13px;
   color: #6B6B6B;
   transition: all 0.3s ease;
   display: inline-block;
@@ -231,37 +229,42 @@ body.dark-theme .contactText {
   width: fit-content;
   letter-spacing: 0.2px;
   text-decoration: none;
+  padding-left: 0;
 }
 
 body.dark-theme .link {
   color: #E5E5E5;
 }
 
-.link::after {
-  content: '';
+.link::before {
+  content: '→';
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: #1A1A1A;
-  transition: width 0.3s ease, background-color 0.6s ease;
-}
-
-body.dark-theme .link::after {
-  background-color: #FFFFFF;
+  left: -16px;
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 
 .link:hover {
   color: #1A1A1A;
+  padding-left: 16px;
 }
 
 body.dark-theme .link:hover {
   color: #FFFFFF;
 }
 
-.link:hover::after {
-  width: 100%;
+.link:hover::before {
+  opacity: 1;
+  left: 0;
+}
+
+/* ========================================
+   COLUNA 3 - REDES SOCIAIS
+   ======================================== */
+.socialColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .socialList {
@@ -277,82 +280,108 @@ body.dark-theme .link:hover {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 14px;
+  font-size: 13px;
   color: #6B6B6B;
   transition: all 0.3s ease;
   font-weight: 400;
   width: fit-content;
   letter-spacing: 0.2px;
   text-decoration: none;
+  position: relative;
+  padding: 8px 0;
 }
 
 body.dark-theme .socialLink {
   color: #E5E5E5;
 }
 
-.socialIconWrapper {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #F5F5F5;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-body.dark-theme .socialIconWrapper {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.socialLink:hover .socialIconWrapper {
-  background-color: #1A1A1A;
-  transform: translateY(-2px) rotate(5deg);
-}
-
-body.dark-theme .socialLink:hover .socialIconWrapper {
-  background-color: #FFFFFF;
-}
-
 .socialIcon {
-  font-size: 18px;
+  font-size: 20px;
   color: #1A1A1A;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform;
 }
 
 body.dark-theme .socialIcon {
   color: #FFFFFF;
 }
 
-.socialLink:hover .socialIcon {
-  color: #FFFFFF;
-}
-
-body.dark-theme .socialLink:hover .socialIcon {
-  color: #1A1A1A;
-}
-
 .socialLink:hover {
   color: #1A1A1A;
+  transform: translateX(4px);
 }
 
 body.dark-theme .socialLink:hover {
   color: #FFFFFF;
 }
 
+.socialLink:hover .socialIcon {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+/* Linha animada no hover */
+.socialLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #1A1A1A;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-theme .socialLink::after {
+  background-color: #FFFFFF;
+}
+
+.socialLink:hover::after {
+  width: 100%;
+}
+
+/* ========================================
+   DIVISOR
+   ======================================== */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #E5E5E5 20%,
+    #E5E5E5 80%,
+    transparent
+  );
+  margin-bottom: 40px;
+  transition: background 0.6s ease;
+}
+
+body.dark-theme .divider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent
+  );
+}
+
+/* ========================================
+   BOTTOM BAR
+   ======================================== */
 .bottomBar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .copyright {
-  font-size: 13px;
+  font-size: 11px;
   color: #6B6B6B;
   margin: 0;
-  text-align: center;
   font-weight: 400;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
   transition: color 0.6s ease;
 }
 
@@ -360,19 +389,71 @@ body.dark-theme .copyright {
   color: #E5E5E5;
 }
 
+/* Badge Tech */
+.techBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: #F5F5F5;
+  border: 1px solid #E5E5E5;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #1A1A1A;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+body.dark-theme .techBadge {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+.techBadge:hover {
+  background-color: #1A1A1A;
+  border-color: #1A1A1A;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+body.dark-theme .techBadge:hover {
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #1A1A1A;
+}
+
+.badgeIcon {
+  font-size: 12px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+/* Desktop Médio */
 @media (max-width: 1200px) {
   .mainGrid {
     gap: 60px;
   }
-
-  .columnsGrid {
-    gap: 60px;
-  }
 }
 
+/* Tablet */
 @media (max-width: 968px) {
   .footer {
-    padding: 100px 0 40px;
+    padding: 60px 0 32px;
   }
 
   .container {
@@ -381,34 +462,25 @@ body.dark-theme .copyright {
 
   .mainGrid {
     grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
-  }
-
-  .logoColumn {
-    justify-content: center;
-  }
-
-  .columnsGrid {
-    grid-template-columns: 1fr;
     gap: 48px;
   }
 
-  .column {
-    align-items: center;
-    text-align: center;
+  .brandColumn,
+  .contactColumn,
+  .socialColumn {
+    align-items: flex-start;
   }
 
-  .contactItem {
+  .bottomBar {
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    text-align: center;
   }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
   .footer {
-    padding: 80px 0 32px;
+    padding: 48px 0 24px;
   }
 
   .container {
@@ -416,57 +488,41 @@ body.dark-theme .copyright {
   }
 
   .mainGrid {
-    gap: 32px;
-    margin-bottom: 48px;
-  }
-
-  .tagline {
-    font-size: 16px;
+    gap: 40px;
   }
 
   .logo {
-    width: 180px;
+    width: 160px;
     height: auto;
   }
 
-  .divider {
-    margin-bottom: 48px;
+  .tagline {
+    font-size: 12px;
   }
 
-  .columnsGrid {
-    gap: 40px;
-    margin-bottom: 48px;
-  }
-
-  .columnTitle {
-    font-size: 10px;
+  .sectionTitle {
+    font-size: 9px;
   }
 
   .contactList,
   .linkList,
   .socialList {
-    gap: 14px;
-  }
-
-  .iconWrapper,
-  .socialIconWrapper {
-    width: 32px;
-    height: 32px;
-  }
-
-  .contactIcon,
-  .socialIcon {
-    font-size: 14px;
+    gap: 12px;
   }
 
   .contactLink,
   .contactText,
   .link,
   .socialLink {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .copyright {
-    font-size: 11px;
+    font-size: 10px;
+  }
+
+  .techBadge {
+    font-size: 9px;
+    padding: 5px 10px;
   }
 }
