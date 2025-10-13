@@ -34,6 +34,8 @@ interface LeadFormProps {
 export default function LeadForm({ onComplete }: LeadFormProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState<FormData>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const totalSteps = 9
 
@@ -124,15 +126,44 @@ export default function LeadForm({ onComplete }: LeadFormProps) {
     setCurrentStep(7)
   }
 
-  // Step 9 - Contato (Final)
-  const handleStep9Submit = (data: { name: string; email: string; phone: string; preferredContact: string[] }) => {
+  // Step 9 - Contato (Final) - ATUALIZADO COM ENVIO AO BACKEND
+  const handleStep9Submit = async (data: { name: string; email: string; phone: string; preferredContact: string[] }) => {
     const finalData = { ...formData, ...data }
     setFormData(finalData)
-    onComplete(finalData)
+    setIsSubmitting(true)
+    setSubmitError(null)
+
+    try {
+      // Enviar para a API
+      const response = await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(finalData)
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Erro ao enviar formulário')
+      }
+
+      const result = await response.json()
+      console.log('Lead enviado com sucesso:', result)
+
+      // Chamar callback de sucesso
+      onComplete(finalData)
+
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error)
+      setSubmitError(error instanceof Error ? error.message : 'Erro ao enviar formulário')
+      setIsSubmitting(false)
+    }
   }
 
   const handleStep9Back = () => {
     setCurrentStep(8)
+    setSubmitError(null)
   }
 
   return (
@@ -176,7 +207,12 @@ export default function LeadForm({ onComplete }: LeadFormProps) {
       )}
 
       {currentStep === 9 && (
-        <Step9 onSubmit={handleStep9Submit} onBack={handleStep9Back} />
+        <Step9 
+          onSubmit={handleStep9Submit} 
+          onBack={handleStep9Back}
+          isSubmitting={isSubmitting}
+          submitError={submitError}
+        />
       )}
     </div>
   )

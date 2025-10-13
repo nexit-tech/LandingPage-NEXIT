@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { HiCheckCircle, HiArrowLeft } from 'react-icons/hi2'
+import { HiCheckCircle, HiArrowLeft, HiExclamationCircle } from 'react-icons/hi2'
 import { FaWhatsapp, FaDiscord, FaLinkedin, FaInstagram } from 'react-icons/fa'
 import { HiEnvelope } from 'react-icons/hi2'
 import styles from './Steps.module.css'
@@ -9,6 +9,8 @@ import styles from './Steps.module.css'
 interface Step9Props {
   onSubmit: (data: ContactData) => void
   onBack: () => void
+  isSubmitting?: boolean
+  submitError?: string | null
 }
 
 interface ContactData {
@@ -25,7 +27,7 @@ interface FormErrors {
   preferredContact?: string
 }
 
-export default function Step9({ onSubmit, onBack }: Step9Props) {
+export default function Step9({ onSubmit, onBack, isSubmitting = false, submitError = null }: Step9Props) {
   const [formData, setFormData] = useState<ContactData>({
     name: '',
     email: '',
@@ -123,6 +125,30 @@ export default function Step9({ onSubmit, onBack }: Step9Props) {
         Preencha seus dados e escolha as plataformas onde prefere receber nossa proposta.
       </p>
 
+      {/* Mensagem de erro global */}
+      {submitError && (
+        <div style={{
+          padding: '16px',
+          backgroundColor: '#FFF5F5',
+          border: '1px solid #FFE5E5',
+          borderRadius: '12px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          marginBottom: '24px'
+        }}>
+          <HiExclamationCircle style={{ fontSize: '24px', color: '#1A1A1A', flexShrink: 0 }} />
+          <div>
+            <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#1A1A1A' }}>
+              Erro ao enviar formulário
+            </p>
+            <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#6B6B6B' }}>
+              {submitError}
+            </p>
+          </div>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className={styles.contactForm}>
         <div className={styles.formGroup}>
           <label htmlFor="name" className={styles.label}>
@@ -136,6 +162,7 @@ export default function Step9({ onSubmit, onBack }: Step9Props) {
             onChange={handleChange}
             className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
             placeholder="Seu nome completo"
+            disabled={isSubmitting}
           />
           {errors.name && (
             <span className={styles.errorText}>{errors.name}</span>
@@ -154,6 +181,7 @@ export default function Step9({ onSubmit, onBack }: Step9Props) {
             onChange={handleChange}
             className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
             placeholder="seu@email.com"
+            disabled={isSubmitting}
           />
           {errors.email && (
             <span className={styles.errorText}>{errors.email}</span>
@@ -172,6 +200,7 @@ export default function Step9({ onSubmit, onBack }: Step9Props) {
             onChange={handleChange}
             className={`${styles.input} ${errors.phone ? styles.inputError : ''}`}
             placeholder="(00) 0 0000-0000"
+            disabled={isSubmitting}
           />
           {errors.phone && (
             <span className={styles.errorText}>{errors.phone}</span>
@@ -188,8 +217,8 @@ export default function Step9({ onSubmit, onBack }: Step9Props) {
               return (
                 <div
                   key={method.id}
-                  className={`${styles.contactMethod} ${formData.preferredContact.includes(method.id) ? styles.selected : ''}`}
-                  onClick={() => toggleContactMethod(method.id)}
+                  className={`${styles.contactMethod} ${formData.preferredContact.includes(method.id) ? styles.selected : ''} ${isSubmitting ? styles.disabled : ''}`}
+                  onClick={() => !isSubmitting && toggleContactMethod(method.id)}
                 >
                   <IconComponent className={styles.contactMethodIcon} />
                   <span>{method.label}</span>
@@ -207,6 +236,7 @@ export default function Step9({ onSubmit, onBack }: Step9Props) {
             className={styles.backButton}
             onClick={onBack}
             type="button"
+            disabled={isSubmitting}
           >
             <HiArrowLeft className={styles.backIcon} />
             <span>Voltar</span>
@@ -215,9 +245,19 @@ export default function Step9({ onSubmit, onBack }: Step9Props) {
           <button
             type="submit"
             className={styles.nextButton}
+            disabled={isSubmitting}
           >
-            <span>Finalizar Formulário</span>
-            <HiCheckCircle className={styles.nextIcon} />
+            {isSubmitting ? (
+              <>
+                <span>Enviando...</span>
+                <div className={styles.spinner}></div>
+              </>
+            ) : (
+              <>
+                <span>Finalizar Formulário</span>
+                <HiCheckCircle className={styles.nextIcon} />
+              </>
+            )}
           </button>
         </div>
       </form>
