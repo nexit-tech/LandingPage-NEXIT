@@ -30,6 +30,13 @@
   gap: 32px;
 }
 
+.content > div,
+.content > h1,
+.content > p {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
 .headline {
   font-size: 48px;
   font-weight: 400;
@@ -55,11 +62,10 @@
   margin-top: 16px;
   flex-wrap: wrap;
   justify-content: center;
+  opacity: 0;
+  transform: translateY(50px);
 }
 
-/* ========================================
-   BOTÃO PRIMÁRIO - EFEITO SCAN + BORDA
-   ======================================== */
 .primaryCta {
   padding: 18px 40px;
   background-color: #1A1A1A;
@@ -118,9 +124,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* ========================================
-   BOTÃO SECUNDÁRIO - GEOMETRIC LINES
-   ======================================== */
 .secondaryCta {
   padding: 18px 40px;
   background-color: transparent;
@@ -138,7 +141,6 @@
   transition: color 0.4s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
-/* Preenchimento gradual de baixo para cima */
 .secondaryCta::before {
   content: '';
   position: absolute;
@@ -161,7 +163,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Linhas geométricas decorativas - TOP */
 .secondaryCta::after {
   content: '';
   position: absolute;
@@ -177,7 +178,6 @@
   width: 60%;
 }
 
-/* Ícones dos Botões */
 .ctaIcon {
   font-size: 18px;
   transition: transform 0.3s ease;
@@ -190,7 +190,7 @@
 }
 
 .secondaryCta:hover .ctaIcon {
-  animation: none; /* Removido bounce - GSAP controla */
+  animation: none;
 }
 
 @keyframes arrowPulse {
@@ -202,14 +202,14 @@
   }
 }
 
-/* Indicador de Scroll */
 .scrollIndicator {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  opacity: 0.6;
   margin-top: 60px;
+  opacity: 0;
+  transform: translateY(50px);
 }
 
 .scrollText {
@@ -238,7 +238,6 @@
   }
 }
 
-/* Responsividade Tablet */
 @media (max-width: 1024px) {
   .headline {
     font-size: 40px;
@@ -255,7 +254,6 @@
   }
 }
 
-/* Responsividade Mobile */
 @media (max-width: 768px) {
   .hero {
     padding-top: 70px;
@@ -268,6 +266,20 @@
 
   .content {
     gap: 28px;
+  }
+
+  .content > div,
+  .content > h1,
+  .content > p {
+    transform: translateY(30px);
+  }
+
+  .ctaGroup {
+    transform: translateY(30px);
+  }
+
+  .scrollIndicator {
+    transform: translateY(30px);
   }
 
   .headline {
@@ -305,7 +317,6 @@
   }
 }
 
-/* Responsividade Mobile Pequeno */
 @media (max-width: 480px) {
   .container {
     padding: 0 20px;
@@ -330,7 +341,6 @@
   }
 }
 
-/* Responsividade Landscape Mobile */
 @media (max-width: 768px) and (orientation: landscape) {
   .hero {
     min-height: auto;
@@ -346,7 +356,6 @@
   }
 }
 
-/* Desabilita animações em touch devices */
 @media (hover: none) {
   .primaryCta:hover,
   .secondaryCta:hover {

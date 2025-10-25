@@ -18,6 +18,9 @@ const rubikMonoOne = Rubik_Mono_One({
 export const metadata: Metadata = {
   title: "NEXIT - Automação Inteligente",
   description: "Transformamos processos complexos em fluxos automatizados",
+  icons: {
+    icon: "/logo/nexitbwhite.png",
+  },
 };
 
 export default function RootLayout({

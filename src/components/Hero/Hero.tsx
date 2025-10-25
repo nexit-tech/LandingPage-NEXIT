@@ -1,20 +1,64 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { HiArrowRight, HiChevronDown } from 'react-icons/hi2'
 import gsap from 'gsap'
 import SoftwareTag from '@/components/SoftwareTag/SoftwareTag'
-import ScrollReveal from '@/components/ScrollReveal/ScrollReveal'
 import styles from './Hero.module.css'
 
 export default function Hero() {
   const primaryBtnRef = useRef<HTMLAnchorElement>(null)
   const secondaryBtnRef = useRef<HTMLAnchorElement>(null)
+  const tagRef = useRef<HTMLDivElement>(null)
+  const headlineRef = useRef<HTMLHeadingElement>(null)
+  const subheadlineRef = useRef<HTMLParagraphElement>(null)
+  const ctaGroupRef = useRef<HTMLDivElement>(null)
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null)
 
-  // ========================================
-  // ANIMAÇÃO BOTÃO PRIMÁRIO - Tech Scan
-  // ========================================
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    const yOffset = isMobile ? 30 : 50
+
+    gsap.set([tagRef.current, headlineRef.current, subheadlineRef.current, ctaGroupRef.current, scrollIndicatorRef.current], {
+      opacity: 0,
+      y: yOffset
+    })
+
+    const tl = gsap.timeline({ delay: 0.2 })
+
+    tl.to(tagRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    })
+    .to(headlineRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, '-=0.6')
+    .to(subheadlineRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, '-=0.6')
+    .to(ctaGroupRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, '-=0.6')
+    .to(scrollIndicatorRef.current, {
+      opacity: 0.6,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, '-=0.4')
+  }, [])
+
   const handlePrimaryHover = (entering: boolean) => {
     const btn = primaryBtnRef.current
     if (!btn) return
@@ -79,9 +123,6 @@ export default function Hero() {
     }
   }
 
-  // ========================================
-  // ANIMAÇÃO BOTÃO SECUNDÁRIO - SEM AJUSTE DE TEXTO
-  // ========================================
   const handleSecondaryHover = (entering: boolean) => {
     const btn = secondaryBtnRef.current
     if (!btn) return
@@ -89,7 +130,6 @@ export default function Hero() {
     const icon = btn.querySelector(`.${styles.ctaIcon}`)
 
     if (entering) {
-      // APENAS ícone - rotação e bounce
       gsap.to(icon, {
         rotation: 180,
         y: 3,
@@ -98,7 +138,6 @@ export default function Hero() {
         ease: 'back.out(2)'
       })
 
-      // Borda - pulsa suavemente
       gsap.to(btn, {
         borderColor: '#000000',
         borderWidth: '2.5px',
@@ -106,7 +145,6 @@ export default function Hero() {
         ease: 'power2.out'
       })
 
-      // Shadow pulsa
       gsap.to(btn, {
         boxShadow: '0 0 0 4px rgba(26, 26, 26, 0.1)',
         duration: 0.4,
@@ -134,13 +172,9 @@ export default function Hero() {
     }
   }
 
-  // ========================================
-  // ANIMAÇÃO NO CLICK - Feedback Visual
-  // ========================================
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, isPrimary: boolean) => {
     const btn = e.currentTarget
 
-    // Ripple effect
     const ripple = document.createElement('span')
     ripple.style.cssText = `
       position: absolute;
@@ -164,7 +198,6 @@ export default function Hero() {
       onComplete: () => ripple.remove()
     })
 
-    // Shake micro
     gsap.to(btn, {
       scale: 0.95,
       duration: 0.1,
@@ -183,57 +216,49 @@ export default function Hero() {
     <section id="hero" className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <ScrollReveal direction="fade" delay={100}>
+          <div ref={tagRef}>
             <SoftwareTag />
-          </ScrollReveal>
+          </div>
           
-          <ScrollReveal direction="up" delay={200}>
-            <h1 className={styles.headline}>
-              Sua Próxima Saída Para Automação Inteligente
-            </h1>
-          </ScrollReveal>
+          <h1 ref={headlineRef} className={styles.headline}>
+            Sua Próxima Saída Para Automação Inteligente
+          </h1>
           
-          <ScrollReveal direction="up" delay={300}>
-            <p className={styles.subheadline}>
-              Transformamos processos complexos em fluxos automatizados que escalam seu negócio. 
-              Soluções personalizadas que entregam resultados mensuráveis desde o primeiro dia.
-            </p>
-          </ScrollReveal>
+          <p ref={subheadlineRef} className={styles.subheadline}>
+            Transformamos processos complexos em fluxos automatizados que escalam seu negócio. 
+            Soluções personalizadas que entregam resultados mensuráveis desde o primeiro dia.
+          </p>
 
-          <ScrollReveal direction="up" delay={400}>
-            <div className={styles.ctaGroup}>
-              <Link 
-                ref={primaryBtnRef}
-                href="/lead-capture" 
-                className={styles.primaryCta}
-                onMouseEnter={() => handlePrimaryHover(true)}
-                onMouseLeave={() => handlePrimaryHover(false)}
-                onClick={(e) => handleClick(e, true)}
-              >
-                <span>Comece Sua Transformação</span>
-                <HiArrowRight className={styles.ctaIcon} />
-              </Link>
-              
-              <a 
-                ref={secondaryBtnRef}
-                href="#metodologia" 
-                className={styles.secondaryCta}
-                onMouseEnter={() => handleSecondaryHover(true)}
-                onMouseLeave={() => handleSecondaryHover(false)}
-                onClick={(e) => handleClick(e, false)}
-              >
-                <span>Conheça Nossa Metodologia</span>
-                <HiChevronDown className={styles.ctaIcon} />
-              </a>
-            </div>
-          </ScrollReveal>
+          <div ref={ctaGroupRef} className={styles.ctaGroup}>
+            <Link 
+              ref={primaryBtnRef}
+              href="/lead-capture" 
+              className={styles.primaryCta}
+              onMouseEnter={() => handlePrimaryHover(true)}
+              onMouseLeave={() => handlePrimaryHover(false)}
+              onClick={(e) => handleClick(e, true)}
+            >
+              <span>Comece Sua Transformação</span>
+              <HiArrowRight className={styles.ctaIcon} />
+            </Link>
+            
+            <a 
+              ref={secondaryBtnRef}
+              href="#metodologia" 
+              className={styles.secondaryCta}
+              onMouseEnter={() => handleSecondaryHover(true)}
+              onMouseLeave={() => handleSecondaryHover(false)}
+              onClick={(e) => handleClick(e, false)}
+            >
+              <span>Conheça Nossa Metodologia</span>
+              <HiChevronDown className={styles.ctaIcon} />
+            </a>
+          </div>
 
-          <ScrollReveal direction="fade" delay={600}>
-            <div className={styles.scrollIndicator}>
-              <span className={styles.scrollText}>Role para descobrir</span>
-              <div className={styles.scrollLine}></div>
-            </div>
-          </ScrollReveal>
+          <div ref={scrollIndicatorRef} className={styles.scrollIndicator}>
+            <span className={styles.scrollText}>Role para descobrir</span>
+            <div className={styles.scrollLine}></div>
+          </div>
         </div>
       </div>
     </section>
