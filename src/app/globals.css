@@ -4,6 +4,32 @@
   box-sizing: border-box;
 }
 
+/* SELEÇÃO PADRÃO (Para fundos claros) */
+/* Fundo Preto, Texto Branco */
+::selection {
+  background: #1A1A1A; 
+  color: #FFFFFF;      
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #1A1A1A;
+  color: #FFFFFF;
+  text-shadow: none;
+}
+
+/* --- NOVO: SELEÇÃO INVERTIDA (Para fundos escuros) --- */
+/* Quando o body for dark, a seleção vira Branca com Texto Preto */
+body.dark-theme ::selection {
+  background: #FFFFFF;
+  color: #1A1A1A;
+}
+
+body.dark-theme ::-moz-selection {
+  background: #FFFFFF;
+  color: #1A1A1A;
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-width: none;

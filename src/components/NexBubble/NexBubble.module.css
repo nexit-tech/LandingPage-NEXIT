@@ -1,0 +1,144 @@
+.bubbleContainer {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bubbleContainer.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.bubble {
+  width: 60px;
+  height: 60px;
+  background-color: #1A1A1A; /* Padrão: Preto */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF; /* Padrão: Branco */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- NOVO: INVERSÃO AUTOMÁTICA EM ÁREAS ESCURAS --- */
+/* Quando o body tem a classe .dark-theme (gerada pelo BackgroundMorph) */
+:global(body.dark-theme) .bubble {
+  background-color: #FFFFFF; /* Vira Branco */
+  color: #1A1A1A;            /* Ícone vira Preto */
+  border-color: rgba(26, 26, 26, 0.1);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15); /* Sombra clara (glow) */
+}
+
+/* Ajuste do Hover no modo Dark */
+:global(body.dark-theme) .bubble:hover {
+  background-color: #F0F0F0;
+  transform: scale(1.1);
+}
+
+/* Hover Padrão (Modo Claro) */
+.bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  background-color: #000000;
+}
+
+.icon {
+  font-size: 24px;
+  position: relative;
+  z-index: 2;
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  right: 76px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  background: #FFFFFF;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1A1A1A;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Inverte tooltip também no dark mode para não ficar estranho */
+:global(body.dark-theme) .tooltip {
+  background: #1A1A1A;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bubbleContainer:hover .tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 768px) {
+  .bubbleContainer {
+    bottom: 24px;
+    right: 24px;
+  }
+  
+  .bubble {
+    width: 50px;
+    height: 50px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+  
+  .tooltip {
+    display: none;
+  }
+}
+
+/* ... (Mantenha o CSS anterior) ... */
+
+@media (max-width: 768px) {
+  .bubbleContainer {
+    bottom: 24px;
+    right: 20px; /* Um pouco mais para a borda */
+    z-index: 9999; /* Garante que fique acima de tudo */
+  }
+  
+  .bubble {
+    width: 56px; /* Levemente menor que desktop (60px), mas bom para o dedo */
+    height: 56px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra mais forte para destacar */
+  }
+
+  .icon {
+    font-size: 22px;
+  }
+  
+  /* Esconde o tooltip no mobile pois não existe "hover" com o dedo */
+  .tooltip {
+    display: none !important;
+  }
+}

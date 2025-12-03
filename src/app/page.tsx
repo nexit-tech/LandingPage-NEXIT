@@ -6,12 +6,15 @@ import CTASection from '@/components/CTASection/CTASection'
 import Footer from '@/components/Footer/Footer'
 import CustomCursor from '@/components/CustomCursor/CustomCursor'
 import BackgroundMorph from '@/components/BackgroundMorph/BackgroundMorph'
+import NexBubble from '@/components/NexBubble/NexBubble' // Importar aqui
 
 export default function Home() {
   return (
     <>
       <CustomCursor />
       <BackgroundMorph />
+      <NexBubble /> {/* Adicionar aqui */}
+      
       <main>
         {/* Navegação */}
         <Navbar />

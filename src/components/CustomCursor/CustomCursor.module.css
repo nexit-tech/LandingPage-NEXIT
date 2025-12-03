@@ -5,7 +5,7 @@
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 999999; /* AUMENTADO PARA O MÁXIMO */
   top: -6px;
   left: -6px;
   will-change: transform;
